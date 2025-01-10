@@ -1,0 +1,68 @@
+### Test API Base URL
+GET http://localhost:5000/
+###
+
+### User Routes
+
+# Register a new user
+POST http://localhost:5000/users-api/register
+Content-Type: application/json
+
+{
+    "name": "Anudeep",
+    "email": "putta@example.com",
+    "password": "password123"
+}
+
+###
+
+# Log in a user
+POST http://localhost:5000/users-api/login
+Content-Type: application/json
+
+{
+    "email": "putta@example.com",
+    "password": "password123"
+}
+
+###
+
+# Get user details by ID
+### Stock Routes
+
+# Add a new stock
+POST http://localhost:5000/stocks-api/
+Content-Type: application/json
+
+{
+    "stockName": "Gold",
+    "ticker": "gld",
+    "quantity": 10,
+    "buyPrice": 70000,
+    "currentPrice":72000
+}
+//updatig stock error
+###
+PUT http://localhost:5000/stocks-api/6779078fce3bebf28a3ee913
+Content-Type: application/json
+
+{
+    "stockName": "bronze",
+    "ticker": "bz",
+    "quantity": 30,
+    "buyPrice": 9000
+}
+###
+GET http://localhost:5000/stocks-api/
+
+###
+# Fetch all stocks
+GET http://localhost:5000/stocks-api/portfolio-distribution
+
+# Fetch all stocks
+###
+GET http://localhost:5000/stocks-api/stock-performance/1
+
+//deleting stock is error
+###
+DELETE http://localhost:5000/stocks-api/677faaf3bada1ca809941365
