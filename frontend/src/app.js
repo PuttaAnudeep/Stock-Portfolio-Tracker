@@ -20,13 +20,12 @@ const App = () => {
 
         {/* Main Content */}
         <main className="flex-grow container mx-auto p-4">
-          <Routes>
-            {/* Public Routes */}
+          <Routes>  
+            {/* Protected Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Protected Routes */}
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/add-stock" element={<AddEditStock />} />
             <Route path="/edit-stock/:id" element={<AddEditStock />} />
             <Route path="/stock-list" element={<StockList />} />

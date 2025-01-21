@@ -27,7 +27,10 @@ const PieChart = ({ data }) => {
         label:"Stock Distribution",
         data: data.map((item) => item.totalQuantity), // Ensure `totalValue` exists
         backgroundColor: [
-          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0",
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", 
+          "#FF9F40", "#8A89A6", "#E377C2", "#7FDBFF", "#01FF70", 
+          "#FF4136", "#B10DC9", "#85144B", "#FFDC00", "#39CCCC", 
+          "#3D9970", "#111111", "#AAAAAA", "#FF851B", "#F012BE"
         ],
         /*backgroundColor: colors, // Dynamically generated colors
         borderColor: colors.map((color) => color.replace("60%", "50%")),*/
@@ -48,7 +51,7 @@ const PieChart = ({ data }) => {
             const stockName = context.label || "";
             const value = context.raw || 0;
             const gainOrLoss = data[context.dataIndex]?.gainOrLoss || "";
-            return `${stockName}: $${value} (${gainOrLoss})`;
+            return `${stockName}: ${value} (${gainOrLoss})`;
           },
         },
       },
@@ -66,7 +69,9 @@ const PieChart = ({ data }) => {
     },
   };
   return (
-      <Pie data={chartData} options={options} />
+    <div className="bg-pink-200 p-6 rounded-lg shadow-md">
+    <Pie data={chartData} options={options} />
+    </div>
   );
 };
 

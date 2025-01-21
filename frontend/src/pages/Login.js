@@ -1,31 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+
 const Login = () => {
-  const [email, setEmail] = useState(""); // State for email input
-  const [password, setPassword] = useState(""); // State for password input
-  const [error, setError] = useState(""); // State for handling errors
-  const navigate = useNavigate(); // Navigation hook for redirecting
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("/users-api/login", {//fetching database 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }), // Send email and password
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        // Store token in localStorage and redirect to dashboard
-        localStorage.setItem("token", data.token);
-        navigate("/");
+      const response = await axios.post("/users-api/login", { email, password });
+      if (response.status === 200) {
+        login({ token: response.data.token });
+        navigate("/dashboard");
       } else {
-        setError(data.message || "Login failed");
+        setError(response.data.message || "Login failed.");
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Invalid credentials or server error.");
     }
   };
 
@@ -36,22 +32,21 @@ const Login = () => {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 border rounded mb-4"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full p-2 border rounded mb-4"
         />
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 border rounded mb-4"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          className="w-full p-2 border rounded mb-4"
         />
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded"
-        >
+        {error && <p className="text-red-500">{error}</p>}
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
           Log In
         </button>
       </form>

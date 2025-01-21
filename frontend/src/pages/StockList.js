@@ -41,7 +41,7 @@ const StockList = () => {
     <div className="container mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6">Your Stock List</h1>
       {error && <p className="text-red-500">{error}</p>}
-      <table className="table-auto w-full bg-white shadow-md rounded">
+      <table className="table-auto w-full shadow-md rounded bg-white">
         <thead>
           <tr>
             <th className="px-4 py-2">Stock Name</th>

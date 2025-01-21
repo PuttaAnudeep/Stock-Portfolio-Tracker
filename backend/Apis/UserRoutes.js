@@ -44,21 +44,39 @@ UserApp.post("/login", async(req, res) => {
 });
 
   // Get user details
-UserApp.get("/:id", async (req, res) => {
-    //get users-collection object from express obj
-    const usersCollection=req.app.get('usersCollection')
-    try {
-    const userId = req.params.id;
-    const user = await usersCollection.findOne(
-        { _id: new require("mongodb").ObjectId(userId) },
-        { projection: { password: 0 } }
-    );
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.status(200).json(user);
-    } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: "Failed to fetch user details" });
-    }
-});
+  const { ObjectId } = require("mongodb"); // Import ObjectId directly from mongodb
 
+  UserApp.get("/:id", async (req, res) => {
+    // Get the users-collection object from the Express app
+    const usersCollection = req.app.get("usersCollection");
+  
+    try {
+      const userId = req.params.id; // Extract the user ID from the route parameter
+  
+      // Check if the ID is a valid MongoDB ObjectId
+      if (!ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: "Invalid user ID format" });
+      }
+  
+      // Find the user in the collection by ID, excluding the password field
+      const user = await usersCollection.findOne(
+        { _id: new ObjectId(userId) },
+        { projection: { password: 0 } } // Exclude the password field
+      );
+  
+      if (!user) {
+        // If no user is found, return a 404 response
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Respond with the user details
+      res.status(200).json(user);
+    } catch (err) {
+      console.error("Error fetching user details:", err.message);
+  
+      // Send a 500 status with a relevant error message
+      res.status(500).json({ message: "Failed to fetch user details" });
+    }
+  });
+  
 module.exports=UserApp

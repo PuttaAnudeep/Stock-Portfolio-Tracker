@@ -2,10 +2,10 @@ const StockCard = ({ stock, className }) => {
   const gainLossPercentage = ((stock.currentPrice - stock.buyPrice) * 100) / stock.buyPrice;
 
   return (
-    <div className={`p-6 shadow-lg rounded-lg bg-white ${className} transition-transform duration-300 hover:scale-105`}>
+    <div className={`p-6 shadow-lg bg-gray-200 rounded-xl ${className} transition-transform duration-300 hover:scale-105`}>
       {/* Stock Name and Ticker */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-gray-800 truncate">{stock.stockName}</h2>
+        <h2 className="text-xl font-serif font-bold text-gray-800 truncate">{stock.stockName}</h2>
         <p className="text-sm text-gray-500">{stock.ticker}</p>
       </div>
 
@@ -38,7 +38,7 @@ const StockCard = ({ stock, className }) => {
 
       {/* Add Hover effect to make the card interactive */}
       <div className="mt-4">
-        <button className="text-sm text-blue-600 hover:underline focus:outline-none">
+        <button className="text-sm text-gray-100 hover:underline focus:outline-none">
           View Details
         </button>
       </div>

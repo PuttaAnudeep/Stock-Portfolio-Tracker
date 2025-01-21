@@ -11,20 +11,23 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("/users-api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }), // Send user data
+      // Make a POST request with user data
+      const response = await axios.post("/users-api/register", {
+        name,
+        email,
+        password,
       });
-
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/login"); // Redirect to login on success
+      // Check if the registration was successful
+      if (response.status) {
+        navigate("/login"); // Redirect to login page
       } else {
-        setError(data.message || "Registration failed");
+        setError(response.data.message || "Registration failed");
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      // Handle errors
+      setError(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
     }
   };
 
