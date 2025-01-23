@@ -27,7 +27,8 @@ const AddEditStock = () => {
       if (response.status) {
         navigate("/stock-list");
       } else {
-        console.error("Failed to save stock");
+        console
+        .error("Failed to save stock");
       }
     } catch (err) {
       console.error("Error saving stock:", err);

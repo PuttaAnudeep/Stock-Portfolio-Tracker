@@ -25,6 +25,7 @@ Content-Type: application/json
     "password": "password123"
 }
 
+
 ###
 GET  http://localhost:5000/users-api/6778ce12d57bfc7c4e658954
 # Get user details by ID

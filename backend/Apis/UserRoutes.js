@@ -23,6 +23,7 @@ UserApp.post("/register", async(req, res) => {
     }
 });
 
+
   // Login a user
 UserApp.post("/login", async(req, res) => {
     //get users-collection object from express obj
@@ -46,12 +47,18 @@ UserApp.post("/login", async(req, res) => {
   // Get user details
   const { ObjectId } = require("mongodb"); // Import ObjectId directly from mongodb
 
-  UserApp.get("/:id", async (req, res) => {
+  UserApp.get("/", async (req, res) => {
     // Get the users-collection object from the Express app
     const usersCollection = req.app.get("usersCollection");
-  
+    const token = req.headers.authorization.slice(7);
+    // console.log(token.slice(7))
+    const obj = jwt.decode(token,{
+      json: true,
+      complete: true
+    });
+    console.log(obj);
     try {
-      const userId = req.params.id; // Extract the user ID from the route parameter
+      const userId = obj.payload.id; // Extract the user ID from the route parameter
   
       // Check if the ID is a valid MongoDB ObjectId
       if (!ObjectId.isValid(userId)) {

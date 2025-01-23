@@ -9,8 +9,6 @@ const StockList = () => {
     const fetchStocks = async () => {
       try {
         const response = await axios.get("/stocks-api/");
-        //const data = await response.json();
-        console.log(response.data)
         if (response.status) {
           setStocks(response.data);
         } else {

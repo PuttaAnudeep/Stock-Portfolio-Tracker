@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PieChart from "../components/PieChart";
-//import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
 import axios from 'axios'
 const API_KEY=import.meta.env
 console.log(API_KEY)
 const PortfolioInsights = () => {
   const [distribution, setDistribution] = useState([]);
- // const [performance, setPerformance] = useState([]);
   const [growth, setGrowth] = useState([]);
-  //console.log(API_KEY);
   useEffect(() => {
     const fetchDistribution = async () => {
       const response = await axios.get("/stocks-api/portfolio-distribution");
       setDistribution(response.data);
       console.log(response.data)
     };
-/*
-    const fetchPerformance = async () => {
-      const response = await axios.get("/stocks-api/stock-performance/portfolioId123");
-      
-      setPerformance(response.data);
-    };
-  */
     const fetchGrowth = async () => {
-      const response = await axios.get('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=${API_KEY}');
-      // Transform the growth data into an array of { date, close }
-      //console.log(response.data)
+      const response = await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=${API_KEY}`);
       const tem=response.data["Monthly Time Series"]
       if(tem===undefined){
        const transformedData=[
@@ -66,7 +54,6 @@ const PortfolioInsights = () => {
             close: parseFloat(response.data["Monthly Time Series"][date]["4. close"]), // Close price
           };
         });
-        //console.log(transformedData)
         setGrowth(transformedData);
         } 
       else {
@@ -75,7 +62,6 @@ const PortfolioInsights = () => {
     };
     
     fetchDistribution();
-    //fetchPerformance();
     fetchGrowth();
   }, []);
 

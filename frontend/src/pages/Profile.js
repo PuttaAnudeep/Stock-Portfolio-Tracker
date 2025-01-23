@@ -8,7 +8,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { user } = useAuth(); // Access the current user from the AuthContext
-
+  
   // Fetch user details on initial load
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -20,24 +20,23 @@ const Profile = () => {
           setLoading(false);
           return;
         }
-
+        console.log(token)
         // Check if user.id is available
-        if (!user || !user.id) {
+        if (!user) {
           setError("User ID is missing.");
           setLoading(false);
           return;
         }
 
         // Make an API call to fetch user details
-        const response = await axios.get(`/users-api/${user.id}`, {
+        const response = await axios.get(`/users-api`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         // Debug: Log the response to check its structure
-        console.log(response);
 
         // Assuming the response contains a data object with name and email
-        if (response.status === 200) {
+        if (response.status) {
           const { name, email } = response.data; // Correctly accessing response data
           setName(name);
           setEmail(email);
@@ -58,7 +57,7 @@ const Profile = () => {
       setError("User not found.");
       setLoading(false);
     }
-  }, [user]);
+  }, []);
 
   // Handle form submission to update the profile
   const handleUpdate = async (e) => {

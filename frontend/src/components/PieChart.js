@@ -1,18 +1,8 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-/*const generateColors = (numColors) => {
-  const colors = [];
-  for (let i = 0; i < numColors; i++) {
-    const randomColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`; // Generates a random color in HSL format
-    colors.push(randomColor);
-  }
-  return colors;
-};*/
 
 const PieChart = ({ data }) => {
   if (!Array.isArray(data)) {
@@ -32,8 +22,6 @@ const PieChart = ({ data }) => {
           "#FF4136", "#B10DC9", "#85144B", "#FFDC00", "#39CCCC", 
           "#3D9970", "#111111", "#AAAAAA", "#FF851B", "#F012BE"
         ],
-        /*backgroundColor: colors, // Dynamically generated colors
-        borderColor: colors.map((color) => color.replace("60%", "50%")),*/
         borderWidth: 1,
       },
     ],
@@ -76,62 +64,4 @@ const PieChart = ({ data }) => {
 };
 
 export default PieChart;
-
-/*import React from "react";
-import { Pie } from "react-chartjs-2";
-
-const PieChart = ({ data }) => {
-  const chartData = {
-    labels: data.map((item) => item._id),
-    datasets: [
-      {
-        data: data.map((item) => item.totalValue),
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
-      },
-    ],
-  };
-
-  return <Pie data={chartData} />;
-};
-export default PieChart;*/
-/*import React, { useEffect, useRef } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
-// Register the necessary Chart.js components
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-const PieChart = ({ data }) => {
-  const chartRef = useRef(null);
-
-  useEffect(() => {
-    if (chartRef.current) {
-      const chartInstance = new ChartJS(chartRef.current, {
-        type: "pie", // Chart type
-        data: {
-          labels: data.labels, // Assuming `data` has `labels` and `values`
-          datasets: [
-            {
-              label: "Portfolio Distribution",
-              data: data.values, // The distribution data
-              backgroundColor: data.colors, // Assuming `data` has `colors`
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-        },
-      });
-
-      return () => {
-        // Destroy the chart when the component unmounts
-        chartInstance.destroy();
-      };
-    }
-  }, [data]); // Re-render when `data` changes
-
-  return <canvas ref={chartRef}></canvas>;
-};
-
-export default PieChart;*/
 

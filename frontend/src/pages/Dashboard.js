@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import StockCard from "../components/StockCard";
-//import { FaBox } from "react-icons/fa"; // Import the stock icon
 import axios from "axios";
 import PortfolioInsights from "./PortfolioInsights";
 const Dashboard = () => {
   const [stocks, setStocks] = useState([]);
   const [totalPortfolio, setTotalPortfolio] = useState(0);
-  //const [totalPortfolio,setTotalPortfolio]=useState([]);
-  const [showStockCards, setShowStockCards] = useState(false); // Toggle visibility of stock cards
-  //const [distribution, setDistribution] = useState([]);
   useEffect(() => {
     const fetchStocks = async () => {
       try {
@@ -28,10 +24,6 @@ const Dashboard = () => {
       const stockCurrentPrice = parseFloat(stock.currentPrice) || 0;
       return accumulator + stockQuantity * stockCurrentPrice;
     }, 0);
-  };
-  // Function to toggle stock cards' visibility
-  const toggleStockCards = () => {
-    setShowStockCards(!showStockCards);
   };
   return (
     <div className="bg-grey-100 min-h-screen ">

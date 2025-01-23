@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,29 +12,6 @@ import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-/*function MainHome() {
-  const navigate = useNavigate(); // useNavigate works here because it's within a <Router>
-
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex flex-col items-center justify-center h-[80vh]">
-        <button
-          className="bg-blue-500 text-white py-2 px-6 rounded mb-4"
-          onClick={() => navigate("/login")} // Navigate to the login page
-        >
-          Login
-        </button>
-        <button
-          className="bg-green-500 text-white py-2 px-6 rounded"
-          onClick={() => navigate("/register")} // Navigate to the register page
-        >
-          Register
-        </button>
-      </div>
-    </div>
-  );
-}*/
 
 function Home() {
   return (
