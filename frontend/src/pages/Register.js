@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import background_img from "../assets/image2.png";
 const Base_Url = process.env.REACT_APP_Backend_Url;
 console.log(Base_Url);
 const Register = () => {
@@ -32,8 +33,18 @@ const Register = () => {
       );
     }
   };
-
+  const backgroundStyle = {
+      backgroundImage: `url('${background_img}')`, // Replace with your image path
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '76vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
   return (
+    <div style={backgroundStyle}>
     <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-md rounded">
       <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
       <form onSubmit={handleRegister}>
@@ -66,6 +77,7 @@ const Register = () => {
           Register
         </button>
       </form>
+    </div>
     </div>
   );
 };

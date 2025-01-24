@@ -35,7 +35,6 @@ const AddEditStock = () => {
       console.error("Error saving stock:", err);
     }
   };
-
   return (
     <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-md rounded-lg bg-gray-200 border-2 border-grey-800">
       <h2 className="text-2xl font-bold mb-4 text-center">
@@ -85,6 +84,7 @@ const AddEditStock = () => {
         </button>
       </form>
     </div>
+    
   );
 };
 

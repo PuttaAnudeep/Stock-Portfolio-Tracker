@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import background_img from "../assets/image2.png";
 const Base_Url = process.env.REACT_APP_Backend_Url;
 console.log(Base_Url);
 const Login = () => {
@@ -25,34 +26,44 @@ const Login = () => {
       setError("Invalid credentials or server error.");
     }
   };
-
+  const backgroundStyle = {
+    backgroundImage: `url('${background_img}')`, // Replace with your image path
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: '76vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-md rounded">
-      <h2 className="text-2xl font-bold mb-4 text-center">Log In</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-2 border rounded mb-4"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-2 border rounded mb-4"
-        />
-        {error && <p className="text-red-500">{error}</p>}
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
-          Log In
-        </button>
-      </form>
+    <div style={backgroundStyle}>
+      <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded">
+        <h2 className="text-2xl font-bold mb-4 text-center">Log In</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full p-2 border rounded mb-4"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full p-2 border rounded mb-4"
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
+            Log In
+          </button>
+        </form>
+      </div>
     </div>
   );
-};
-
+}
 export default Login;
