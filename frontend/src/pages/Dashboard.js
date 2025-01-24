@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import StockCard from "../components/StockCard";
 import axios from "axios";
 import PortfolioInsights from "./PortfolioInsights";
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const Dashboard = () => {
   const [stocks, setStocks] = useState([]);
   const [totalPortfolio, setTotalPortfolio] = useState(0);
   useEffect(() => {
     const fetchStocks = async () => {
       try {
-        const response = await axios.get("/stocks-api/");
+        const response = await axios.get(`${Base_Url}/stocks-api/`);
         setStocks(response.data);
         const totalValue = calculateTotalPortfolio(response.data);
         setTotalPortfolio(totalValue)

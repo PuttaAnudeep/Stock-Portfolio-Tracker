@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
@@ -29,7 +29,7 @@ const Navbar = () => {
     <nav className="bg-gray-200 text-white shadow-lg sticky top-0 z-20">
       <div className="container mx-auto flex justify-between items-center h-15 p-2">
         <h1 className="text-4xl font-bold tracking-wide">
-          <Link to="/">Portfolio Tracker</Link>
+          <Link to="/dashboard">Portfolio Tracker</Link>
         </h1>
 
         <div className="lg:hidden cursor-pointer" onClick={toggleMenu}>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +14,7 @@ const Register = () => {
     e.preventDefault();
     try {
       // Make a POST request with user data
-      const response = await axios.post("/users-api/register", {
+      const response = await axios.post(`${Base_Url}/users-api/register`, {
         name,
         email,
         password,

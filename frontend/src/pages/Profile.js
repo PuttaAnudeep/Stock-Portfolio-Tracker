@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext"; // Importing the AuthContext to access user information
-
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const Profile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ const Profile = () => {
         }
 
         // Make an API call to fetch user details
-        const response = await axios.get(`/users-api`, {
+        const response = await axios.get(`${Base_Url}/users-api`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         // Debug: Log the response to check its structure
@@ -70,7 +71,7 @@ const Profile = () => {
       }
       // Make an API call to update user details
       const response = await axios.put(
-        `/users-api/${userId}`, // Correctly pass the user ID as part of the URL
+        `${Base_Url}/users-api/${userId}`, // Correctly pass the user ID as part of the URL
         { name, email }, // Request body with updated data
         { headers: { Authorization: `Bearer ${token}` } } // Include the authorization token
       );

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const StockList = () => {
   const [stocks, setStocks] = useState([]);
   const [error, setError] = useState("");
@@ -8,7 +10,7 @@ const StockList = () => {
   useEffect(() => {
     const fetchStocks = async () => {
       try {
-        const response = await axios.get("/stocks-api/");
+        const response = await axios.get(`${Base_Url}/stocks-api/`);
         if (response.status) {
           setStocks(response.data);
         } else {
@@ -24,7 +26,7 @@ const StockList = () => {
   console.log(stocks)
   const deleteStock = async (id) => {
     try {
-      const response = await axios(`/stocks-api/${id}`, { method: "DELETE" });
+      const response = await axios(`${Base_Url}/stocks-api/${id}`, { method: "DELETE" });
       if (response.status) {
         setStocks(stocks.filter((stock) => stock._id !== id));
       } else {

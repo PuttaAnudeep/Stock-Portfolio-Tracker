@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
-
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,10 +14,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/users-api/login", { email, password });
+      const response = await axios.post(`${Base_Url}/users-api/login`, { email, password });
       if (response.status === 200) {
         login({ token: response.data.token });
-        navigate("/dashboard");
+        navigate(`/dashboard`);
       } else {
         setError(response.data.message || "Login failed.");
       }

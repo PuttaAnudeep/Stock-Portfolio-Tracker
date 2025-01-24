@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const AddEditStock = () => {
   const { id } = useParams(); // Get stock ID from URL for editing
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const AddEditStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = id ? `/stocks-api/${id}` : "/stocks-api/";
+    const url = id ? `${Base_Url}/stocks-api/${id}` : `${Base_Url}/stocks-api/`;
     const method = id ? "PUT" : "POST";
 
     try {

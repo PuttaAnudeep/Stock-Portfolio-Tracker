@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import PieChart from "../components/PieChart";
 import LineChart from "../components/LineChart";
 import axios from 'axios'
+const Base_Url = process.env.REACT_APP_Backend_Url;
+console.log(Base_Url);
 const API_KEY=import.meta.env
 console.log(API_KEY)
 const PortfolioInsights = () => {
@@ -9,7 +11,7 @@ const PortfolioInsights = () => {
   const [growth, setGrowth] = useState([]);
   useEffect(() => {
     const fetchDistribution = async () => {
-      const response = await axios.get("/stocks-api/portfolio-distribution");
+      const response = await axios.get(`${Base_Url}/stocks-api/portfolio-distribution`);
       setDistribution(response.data);
       console.log(response.data)
     };
