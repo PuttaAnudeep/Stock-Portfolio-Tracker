@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext"; // Importing the AuthContext t
 const Profile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(""); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { user } = useAuth(); // Access the current user from the AuthContext
@@ -32,14 +33,13 @@ const Profile = () => {
         const response = await axios.get(`/users-api`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
         // Debug: Log the response to check its structure
-
         // Assuming the response contains a data object with name and email
         if (response.status) {
-          const { name, email } = response.data; // Correctly accessing response data
+          const { name, email,_id } = response.data; // Correctly accessing response data
           setName(name);
           setEmail(email);
+          setUserId(_id);
         } else {
           setError("Failed to fetch user details.");
         }
@@ -57,7 +57,7 @@ const Profile = () => {
       setError("User not found.");
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   // Handle form submission to update the profile
   const handleUpdate = async (e) => {
@@ -68,10 +68,9 @@ const Profile = () => {
         setError("No token found, please log in again.");
         return;
       }
-
       // Make an API call to update user details
       const response = await axios.put(
-        `/users-api/${user.id}`, // Correctly pass the user ID as part of the URL
+        `/users-api/${userId}`, // Correctly pass the user ID as part of the URL
         { name, email }, // Request body with updated data
         { headers: { Authorization: `Bearer ${token}` } } // Include the authorization token
       );

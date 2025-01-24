@@ -29,7 +29,14 @@ Content-Type: application/json
 ###
 GET  http://localhost:5000/users-api/6778ce12d57bfc7c4e658954
 # Get user details by ID
-### Stock Routes
+
+###
+PUT http://localhost:5000/users-api/67912b57cbab3cea9f012b36
+Content-Type: application/json
+{
+    "name": "Anudeep",
+    "email": "22071a66b7@gmail.com"
+}
 
 # Add a new stock
 POST http://localhost:5000/stocks-api/

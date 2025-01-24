@@ -47,43 +47,84 @@ UserApp.post("/login", async(req, res) => {
   // Get user details
   const { ObjectId } = require("mongodb"); // Import ObjectId directly from mongodb
 
-  UserApp.get("/", async (req, res) => {
-    // Get the users-collection object from the Express app
-    const usersCollection = req.app.get("usersCollection");
-    const token = req.headers.authorization.slice(7);
-    // console.log(token.slice(7))
-    const obj = jwt.decode(token,{
-      json: true,
-      complete: true
-    });
-    console.log(obj);
-    try {
-      const userId = obj.payload.id; // Extract the user ID from the route parameter
-  
-      // Check if the ID is a valid MongoDB ObjectId
-      if (!ObjectId.isValid(userId)) {
-        return res.status(400).json({ message: "Invalid user ID format" });
-      }
-  
-      // Find the user in the collection by ID, excluding the password field
-      const user = await usersCollection.findOne(
-        { _id: new ObjectId(userId) },
-        { projection: { password: 0 } } // Exclude the password field
-      );
-  
-      if (!user) {
-        // If no user is found, return a 404 response
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      // Respond with the user details
-      res.status(200).json(user);
-    } catch (err) {
-      console.error("Error fetching user details:", err.message);
-  
-      // Send a 500 status with a relevant error message
-      res.status(500).json({ message: "Failed to fetch user details" });
-    }
+UserApp.get("/", async (req, res) => {
+  // Get the users-collection object from the Express app
+  const usersCollection = req.app.get("usersCollection");
+  const token = req.headers.authorization.slice(7);
+  // console.log(token.slice(7))
+  const obj = jwt.decode(token,{
+    json: true,
+    complete: true
   });
-  
+  console.log(obj);
+  try {
+    const userId = obj.payload.id; // Extract the user ID from the route parameter
+
+    // Check if the ID is a valid MongoDB ObjectId
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    // Find the user in the collection by ID, excluding the password field
+    const user = await usersCollection.findOne(
+      { _id: new ObjectId(userId) },
+      { projection: { password: 0 } } // Exclude the password field
+    );
+
+    if (!user) {
+      // If no user is found, return a 404 response
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Respond with the user details
+    res.status(200).json(user);
+  } catch (err) {
+    console.error("Error fetching user details:", err.message);
+
+    // Send a 500 status with a relevant error message
+    res.status(500).json({ message: "Failed to fetch user details" });
+  }
+});
+UserApp.put("/:id", async (req, res) => {
+  const usersCollection = req.app.get("usersCollection");
+
+  try {
+    const userId = req.params.id; // Extract user ID from URL params
+
+    // Validate if the userId is a valid MongoDB ObjectId
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    // Extract update fields from the request body
+    const { name, email} = req.body;
+    if (!name && !email === 0) {
+      return res.status(400).json({ message: "No update fields provided" });
+    }
+    
+    // Build the update object
+    const updateFields = {};
+    if (name) updateFields.name = name;
+    if (email) updateFields.email = email;
+
+    // Update the user document in the database
+    const result = await usersCollection.updateOne(
+      { _id: new ObjectId(userId) }, // Query to find the user by ID
+      { $set: updateFields } // Update the provided fields
+    );
+
+    if (result.matchedCount === 0) {
+      // No matching user found
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Return success response
+    res.status(200).json({ message: "User updated successfully", updatedFields: updateFields });
+  } catch (err) {
+    console.error("Error updating user details:", err.message);
+    res.status(500).json({ message: "Failed to update user details" });
+  }
+});
+
+
 module.exports=UserApp
