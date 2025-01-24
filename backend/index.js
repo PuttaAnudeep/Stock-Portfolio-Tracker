@@ -9,11 +9,11 @@ const app = express();
 app.use(express.json()); // Parse JSON payloads
 app.use(cors()); // Enable CORS for all routes
 
-const mongoURI = process.env.MONGO_URI|| "mongodb://localhost:27017";
+const MONGO_URI = process.env.MONGO_URI;
 const dbName = "portfolioTracker";
 let db, usersCollection, stocksCollection;
 // Connect to MongoDB
-mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true,useUnifiedTopology: true,})
+mongoClient.connect(MONGO_URI, { useNewUrlParser: true,useUnifiedTopology: true,})
 .then((client) =>{ 
     db = client.db(dbName);
 
