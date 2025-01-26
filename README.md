@@ -112,7 +112,9 @@ May require adjustments for specific deployment setups.
 Thank you for using this application!
 
 **Deployement Link:**
+
 stock-portfolio-tracker-app.netlify.app
 
 **API Link:**
+
 https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=IBM&apikey=demo
