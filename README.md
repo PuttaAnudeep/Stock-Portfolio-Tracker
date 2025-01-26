@@ -2,7 +2,7 @@
 
 **Project Overview**
 
-This is a web application designed to **[provide an overview of what your application does, e.g., "manage portfolios," "track attendance," or "connect users to stress relief resources"]**. The project utilizes the **MERN stack**(MongoDB, Express.js, React, and Node.js) and has been successfully deployed with:
+This is a web application designed to **manage the stocks by effective stock portfolio platform and calculates the total portfolio value**. The project utilizes the **MERN stack**(MongoDB, Express.js, React, and Node.js) and has been successfully deployed with:
 
 **Frontend**: Hosted on Netlify.
 
@@ -10,21 +10,21 @@ This is a web application designed to **[provide an overview of what your applic
 
 **Database**: MongoDB Atlas.
 
-**Features**
+**Features**:
 
-**[List the main features of your application, e.g., "User Authentication," "Dynamic Dashboard," "Portfolio Tracking," etc.]**
+**The main features of this application are,"User Authentication," "Dynamic Dashboard," "Portfolio Tracking,"**
 
-**Prerequisites**
+**Prerequisites**:
 
 Ensure the following tools are installed:
 
-**Node.js** (version 14 or later)
+Node.js (version 14 or later)
 
-**npm or yarn**
+npm or yarn
 
-**MongoDB (if running locally)**
+MongoDB (if running locally)
 
-**Git**
+Git
 
 **Steps to Run the Project Locally**
 
@@ -75,13 +75,13 @@ npm start
 
 **Assumptions**
 
-**1.The user has basic knowledge of Git and Node.js.**
+1.The user has basic knowledge of Git and Node.js.
 
-**2.The MongoDB cluster is pre-configured for external access.**
+2.The MongoDB cluster is pre-configured for external access.
 
-**3.API keys and sensitive credentials are stored securely in the .env file and are not committed to the repository.**
+3.API keys and sensitive credentials are stored securely in the .env file and are not committed to the repository.
 
-**Limitations**
+**Limitations:**
 
 **1.Performance:**
 
@@ -113,3 +113,5 @@ Thank you for using this application!
 
 **Deployement Link:**
 stock-portfolio-tracker-app.netlify.app
+**API Link:**
+https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=IBM&apikey=demo
